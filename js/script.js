@@ -16,15 +16,24 @@ const message = document.querySelector (".message");
 //8.The hidden button that will appear prompting the player to play again.
 const playAgain = document.querySelector (".play-again");
 
-const word = "Magnolia";
+const word = "Magnolia";  //temporary argument
 
 //Write a Function to Add Placeholders for Each
-const placeholder = fucntion(word) {
+const placeholder = function(word) {
         const placeholderLetters = [];
         for (const letter of word) {
           console.log(letter);
           placeholderLetters.push("●");
         }
-        wordInProgress.innerText = placeHolderLetters.join("");
+        wordInProgress.innerText = placeholderLetters.join(""); //join()method creates and returns a new string by concatinating all of the elements in an array
 };
+
+placeholder(word);
+
 //Add an Event Listener for the Button
+button.addEventListener("click", function (e) {
+    e.preventDefault();
+    const guess = letterInput.value;
+    console.log(guess);
+    letterInput.value = "";   
+});
