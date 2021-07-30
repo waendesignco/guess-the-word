@@ -18,7 +18,7 @@ const playAgain = document.querySelector (".play-again");
 
 const word = "Magnolia";  //temporary argument
 
-//Write a Function to Add Placeholders for Each
+//Write a Function to Add Placeholders for Each Letter
 const placeholder = function(word) {
         const placeholderLetters = [];
         for (const letter of word) {
@@ -37,3 +37,23 @@ button.addEventListener("click", function (e) {
     console.log(guess);
     letterInput.value = "";   
 });
+
+//Create a Function to Check Player’s Input
+const validateInput = function(input) {
+  const acceptedLetter = /[a-zA-Z]/;
+  if (input.length === 0) {
+    message.innerText = "Please enter a letter." ;
+  } else if (!input.match(acceptedLetter)) {  //! is a logical operator, mearning false.
+    message.innerText = "Please enter a letter from A to Z.";
+  } else {
+    return input;
+  }
+};
+
+
+//Validate Input in the Button Event Handler
+
+//Add a New Global Variable for Player Guesses
+
+//Create a Function to Capture Input
+
