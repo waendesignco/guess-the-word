@@ -1,6 +1,6 @@
 //Create global variables to select the following elements
 //1.The unordered list where the player’s guessed letters will appear.
-const guessedLetter = document.querySelector (".guessed-letters");
+const guessedLettersEle = document.querySelector (".guessed-letters");
 //2.The button with the text “Guess!” in it.
 const button = document.querySelector (".guess");
 //3.The text input where the player will guess a letter.
@@ -17,7 +17,7 @@ const message = document.querySelector (".message");
 const playAgain = document.querySelector (".play-again");
 
 const word = "Magnolia";  //temporary argument
-const guessedLetters = [];
+const guessedLetters = [];   //Add a New Global Variable for Player Guesses
 
 //Write a Function to Add Placeholders for Each Letter
 const placeholder = function (word) {
@@ -41,7 +41,7 @@ button.addEventListener("click", function (e) {
     if (goodGuess) {
       makeGuess(guess);    
     }
-    console.log(guess);
+    //console.log(guess);
     letterInput.value = "";   
 });
 
@@ -57,10 +57,13 @@ const validateInput = function (input) {
   }
 };
 
-
-//Validate Input in the Button Event Handler
-
-//Add a New Global Variable for Player Guesses
-
 //Create a Function to Capture Input
-
+const makeGuess = function (guess) {
+  guess = guess.toUpperCase();
+  if (guessedLetters.includes(guess)) {
+    message.innerText = "You already guessed that letter. Try again.";
+   } else {
+      guessedLetters.push(guess);
+      console.log(guessedLetters);
+   }
+};
