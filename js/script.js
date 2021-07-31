@@ -65,5 +65,16 @@ const makeGuess = function (guess) {
    } else {
       guessedLetters.push(guess);
       console.log(guessedLetters);
-   }
+      displayLetters();
+      updateWordInProgress(guessedLetters);   }
+};
+
+//Create a Function to Show the Guessed Letters
+const displayLetters = function (guess) {
+  guessedLettersEle.innterText ="";  //empty letters
+  for (const letter of guessedLetters) {
+    const li = document.createElement("li");
+    li.innerText = letter;
+    guessedLettersEle.append(li);
+  }
 };
