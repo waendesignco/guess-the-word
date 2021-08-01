@@ -91,6 +91,15 @@ const updateWordInProgress = function(gueseedLetters) {
      revealWord.push("●")
   }
   console.log(revealWord);
-  wordInProgress.innerText = revealWord.join("");  
+  wordInProgress.innerText = revealWord.join("");
+  checkIfWin();
+  }
+};
+
+//Create a Function to Check If the Player Won
+const checkIfWin = function () {
+  if (word.toUpperCase() === wordInProgress.innerText) {
+    message.classList.add("win");
+    message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
   }
 };
