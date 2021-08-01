@@ -78,3 +78,19 @@ const displayLetters = function (guess) {
     guessedLettersEle.append(li);
   }
 };
+
+//Create a Function to Update the Word in Progress
+const updateWordInProgress = function(gueseedLetters) {
+  const wordUpper = word.toUpperCase();
+  const wordArray = wordUpper.split("");
+  const revealWord = [];
+  for (const letter of wordArray) {
+   if (guessedLetters.includes(letter)) {
+     revealWord.push(letter.toUpperCase());
+     } else {
+     revealWord.push("●")
+  }
+  console.log(revealWord);
+  wordInProgress.innerText = revealWord.join("");  
+  }
+};
