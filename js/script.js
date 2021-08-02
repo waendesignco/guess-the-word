@@ -10,13 +10,16 @@ const wordInProgress = document.querySelector (".word-in-progress");
 //5.The paragraph where the remaining guesses will display.
 const remainingGuessEle = document.querySelector (".remaining");
 //6.The span inside the paragraph where the remaining guesses will display.
-const remainingGuessNum = document.querySelector (".remaining span");
+const remainingGuessSpan = document.querySelector (".remaining span");
 //7.The empty paragraph where messages will appear when the player guesses a letter.
 const message = document.querySelector (".message");
 //8.The hidden button that will appear prompting the player to play again.
 const playAgain = document.querySelector (".play-again");
 
-const word = "Magnolia";  //temporary argument
+//Declare a Global Variable for the Number of Guesses
+let remainingGuesses = 8;
+
+let word = "Magnolia";  //temporary argument
 const guessedLetters = [];   //Add a New Global Variable for Player Guesses
 
 //Write a Function to Add Placeholders for Each Letter
@@ -65,13 +68,14 @@ const makeGuess = function (guess) {
    } else {
       guessedLetters.push(guess);
       console.log(guessedLetters);
+      updateGuessesRemaining(guess);
       displayLetters();
       updateWordInProgress(guessedLetters);   }
 };
 
 //Create a Function to Show the Guessed Letters
-const displayLetters = function (guess) {
-  guessedLettersEle.innterText ="";  //empty letters
+const displayLetters = function () {
+  guessedLettersEle.innterHTML ="";  //empty letters
   for (const letter of guessedLetters) {
     const li = document.createElement("li");
     li.innerText = letter;
@@ -80,7 +84,7 @@ const displayLetters = function (guess) {
 };
 
 //Create a Function to Update the Word in Progress
-const updateWordInProgress = function(gueseedLetters) {
+const updateWordInProgress = function (gueseedLetters) {
   const wordUpper = word.toUpperCase();
   const wordArray = wordUpper.split("");
   const revealWord = [];
@@ -90,9 +94,29 @@ const updateWordInProgress = function(gueseedLetters) {
      } else {
      revealWord.push("●")
   }
-  console.log(revealWord);
+  //console.log(revealWord);
   wordInProgress.innerText = revealWord.join("");
   checkIfWin();
+  }
+};
+
+//Create a Function to Count Guesses Remaining
+const updateGuessesRemaining = function (guess) {
+  const upperWord = word.toUpperCase();
+  if (!upperWord.includes(guess)) {
+    guessedLetters.push(guess.toUpperCase());
+    message.innerText = `The word has no ${guess}.`;
+    remainingGuesses -= 1;
+  } else {
+    message.innerText = `Bingo! The word has the letter ${guess}.`;
+    }
+
+  if (remainingGuesses === 0) {
+    message.innerHTML = `The game is over. The answer is <span class="highlight">${word}<span>.`;
+  } else if (remainingGuesses === 1) {
+    message.innerText = "Only one guess left.";
+  } else {
+    remainingGuessSpan.innerText = "You have ${remainingGuesses} guesses left.";
   }
 };
 
